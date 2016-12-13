@@ -1,0 +1,94 @@
+<!-- COPYRIGHT (c) 2016 PrinzJuliano
+     This file makes use of the p5js touch events and calculates the direction you dragged to.
+-->
+<html>
+<head>
+<script src="/libs/jquery.min.js"></script>
+<script src="/libs/p5.min.js"></script>
+<script src="/libs/Math.min.js"></script>
+<script src="/libs/p5.Math.min.js"></script>
+<style> body {padding: 0; margin: 0;} </style>
+<meta charset="UTF-8">
+<title>Touch Test</title>
+<script>
+var point;
+var point2;
+function setup() {
+	point = createVector(0,0)
+	point2 = createVector(0,0)
+  createCanvas(windowWidth, windowHeight);
+  strokeWeight(5);
+  stroke(0);
+  fill(0);
+  background(5);
+
+}
+
+function draw() {
+	background(5);
+	stroke(5)
+	stroke(255)
+	line(point.x, point.y, point2.x, point2.y)
+}
+function touchStarted(){
+	point = point2 = touches[0]
+}
+function touchMoved(){
+	point2 = touches[0]
+}
+function touchEnded(){
+	var dir = calc()
+	if(dir[0] === -1)
+		alert("left")
+	else if(dir[0] === 1)
+		alert("right")
+	else if(dir[1] === -1)
+		alert("down")
+	else if(dir[1] === 1)
+		alert("up")
+}
+
+function mousePressed(){
+	point = createVector(mouseX, mouseY)
+	point2 = createVector(mouseX, mouseY)
+}
+function mouseDragged(){
+	point2 = createVector(mouseX, mouseY)
+}
+function mouseReleased(){
+	var dir = calc()
+	if(dir[0] === -1)
+		alert("left")
+	else if(dir[0] === 1)
+		alert("right")
+	else if(dir[1] === -1)
+		alert("down")
+	else if(dir[1] === 1)
+		alert("up")
+}
+
+function calc(){
+	var distanceX = point.x - point2.x
+	var distanceY = point.y - point2.y
+	
+	if(Math.abs(distanceX) > Math.abs(distanceY)){
+		if(distanceX > 0)
+			return [-1, 0] //left
+		else
+			return [1, 0] //right
+	}
+	if(Math.abs(distanceX) < Math.abs(distanceY)){
+		if(distanceX > 0)
+			return [0, -1] // down
+		else
+			return [0, 1] //up
+	}
+		
+	console.log("DX " + distanceX)
+	console.log("DY " + distanceY)
+}
+</script>
+</head>
+<body>
+</body>
+</html>
