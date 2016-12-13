@@ -43,9 +43,9 @@ function touchEnded(){
 	else if(dir[0] === 1)
 		alert("right")
 	else if(dir[1] === -1)
-		alert("down")
-	else if(dir[1] === 1)
 		alert("up")
+	else if(dir[1] === 1)
+		alert("down")
 }
 
 function mousePressed(){
@@ -62,9 +62,9 @@ function mouseReleased(){
 	else if(dir[0] === 1)
 		alert("right")
 	else if(dir[1] === -1)
-		alert("down")
-	else if(dir[1] === 1)
 		alert("up")
+	else if(dir[1] === 1)
+		alert("down")
 }
 
 function calc(){
@@ -78,7 +78,7 @@ function calc(){
 			return [1, 0] //right
 	}
 	if(Math.abs(distanceX) < Math.abs(distanceY)){
-		if(distanceX > 0)
+		if(distanceY > 0)
 			return [0, -1] // down
 		else
 			return [0, 1] //up
