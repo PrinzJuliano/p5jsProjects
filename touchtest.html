@@ -2,15 +2,15 @@
      This file makes use of the p5js touch events and calculates the direction you dragged to.
 -->
 <html>
-<head>
-<script src="/libs/jquery.min.js"></script>
-<script src="/libs/p5.min.js"></script>
-<script src="/libs/Math.min.js"></script>
-<script src="/libs/p5.Math.min.js"></script>
-<style> body {padding: 0; margin: 0;} </style>
-<meta charset="UTF-8">
-<title>Touch Test</title>
-<script>
+	<head>
+		<script src="/libs/jquery.min.js"></script>
+		<script src="/libs/p5.min.js"></script>
+		<script src="/libs/Math.min.js"></script>
+		<script src="/libs/p5.Math.min.js"></script>
+		<style> body {padding: 0; margin: 0;} </style>
+		<meta charset="UTF-8">
+		<title>Touch Test</title>
+		<script>
 var point;
 var point2;
 function setup() {
@@ -87,8 +87,12 @@ function calc(){
 	console.log("DX " + distanceX)
 	console.log("DY " + distanceY)
 }
-</script>
-</head>
-<body>
-</body>
+
+$(document).ready(function(){
+	alert("Drag across the screen in a vertical or horizontal line.\nIf the line is not perfectly diagonal you will get a message with the direction!")
+});
+		</script>
+	</head>
+	<body>
+	</body>
 </html>
