@@ -12,9 +12,9 @@ function Ship(img){
 	
 	
 	this.draw = function(){
-		this.ypos = height-this.img.height
+		this.ypos = height-mobileH-this.img.height
 		if(!this.isHit)
-			image(this.img, this.xpos, height-this.img.height)
+			image(this.img, this.xpos, height-mobileH-this.img.height)
 		else
 		{
 			this.explo.draw()
@@ -24,7 +24,7 @@ function Ship(img){
 	}
 	
 	this.die = function(){
-		this.explo = new explosion(this.xpos, height-this.img.height)
+		this.explo = new explosion(this.xpos, height-mobileH-this.img.height)
 		this.explo.start()
 		this.isHit = true
 		

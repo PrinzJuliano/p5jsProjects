@@ -8,6 +8,9 @@ var highscore = 0
 var edgeCount = 0
 var overInsertCoin = false
 
+var mobile = getCookie("mobileInput")==='true'
+var mobileH = (mobile)?200:0;
+
 var mother = null
 var drawMother = false
 var spawnedMother = false
@@ -20,7 +23,7 @@ var player_img;
 var level = 0
 
 function setup(){
-	var canvas = createCanvas(800, 600)
+	var canvas = createCanvas(800, 600+mobileH)
 	canvas.parent("frame")
 	frameRate(60)
 	
@@ -92,7 +95,7 @@ function draw(){
 		textSize(32);
 		fill(255, 255, 255)
 		textFont("Atari")
-		text("Level: " + level, 200, height/2-100)
+		text("Level: " + level, 200, (height-mobileH)/2-100)
 		return
 	}
 	
@@ -240,13 +243,13 @@ function draw(){
 			//remove all lasers that are of bounds or did hit
 			for(var i = lasers.length-1; i >= 0; i--)
 			{
-				if(lasers[i].y > height || lasers[i].toDelete)
+				if(lasers[i].y+lasers[i].anim.getHeight() > height-mobileH || lasers[i].toDelete)
 					lasers.splice(i, 1)
 			}
 			
 			//check if any of the aliens is on player level
 			for(var i = 0; i < enemies.length; i++){
-				if(enemies[i].intersects(ship.xpos, height-ship.img.height, ship.img.width, ship.img.height)){
+				if(enemies[i].intersects(ship.xpos, height-mobileH-ship.img.height, ship.img.width, ship.img.height)){
 					ship.die()
 					break;
 				}
@@ -266,24 +269,24 @@ function draw(){
 		textSize(32);
 		fill(255, 255, 255)
 		textFont("Atari")
-		text("Game Over", 200, height/2-100)
+		text("Game Over", 200, (height-mobileH)/2-100)
 		
 		textSize(24);
 		fill(255, 255, 255)
 		textFont("Atari")
-		text("Points: " + score, 200, height/2-25)
+		text("Points: " + score, 200, (height-mobileH)/2-25)
 		
 		textSize(24);
 		fill(255, 255, 255)
 		textFont("Atari")
-		text("Highscore: " + highscore, 200, height/2+25)
+		text("Highscore: " + highscore, 200, (height-mobileH)/2+25)
 		
 		textSize(32);
 		fill(255, 255, 255)
 		textFont("Pixel")
-		text("Refresh the page to play again!", 100, height - 32)
+		text("Refresh the page to play again!", 100, (height-mobileH) - 32)
 
-		var distance = dist(mouseX, mouseY, width/2, height/2+100)
+		var distance = dist(mouseX, mouseY, width/2, (height-mobileH)/2+100)
 
 		if(distance < 50)
 			overInsertCoin = true
@@ -303,10 +306,37 @@ function draw(){
 		    fill(200); 
 		    cursor(ARROW); 
 		}
-		ellipse(width/2, height/2+100, 100, 100);
-		text("Insert Coin", width/2-100, height/2+200)
+		ellipse(width/2, (height-mobileH)/2+100, 100, 100);
+		text("Insert Coin", width/2-100, (height-mobileH)/2+200)
 		pop()
 		
+	}
+	
+	if(mobile)
+	{
+		push()
+		stroke("white")
+		strokeWeight(5)
+		line(0, height-mobileH, width, height-mobileH)
+		pop()
+		
+		push()
+		fill(255,255,255)
+		rectMode(CENTER)
+		rect(100, height-mobileH/2, 100, 100) //left
+		rect(250, height-mobileH/2, 100, 100) //right
+		rectMode(CORNER)
+		rect(400, height-mobileH/2-50, (width-450), 100)
+		pop()
+		
+		push()
+		stroke("black")
+		strokeWeight(5)
+		line(100, height-mobileH/2-40, 60, height-mobileH/2)
+		line(100, height-mobileH/2+40, 60, height-mobileH/2)
+		line(250, height-mobileH/2-40, 290, height-mobileH/2)
+		line(250, height-mobileH/2+40, 290, height-mobileH/2)
+		pop()
 	}
 }
 
@@ -315,10 +345,52 @@ function mousePressed(){
 	{
 		resetGame()
 	}
+	if(mobile)
+	{
+		if(mouseX >= 50 && mouseX <= 150 && mouseY >= height-mobileH/2-50 && mouseY <= height-mobileH/2+50)
+			ship.setDir(-1)
+		if(mouseX >= 200 && mouseX <= 300 && mouseY >= height-mobileH/2-50 && mouseY <= height-mobileH/2+50)
+			ship.setDir(1)
+		if(mouseX >= 400 && mouseX <= width-50 && mouseY >= height-mobileH/2-50 && mouseY <= height-mobileH/2+50 )
+		{
+			var bullet = new Bullet(Math.floor(ship.xpos+ship.img.width/2), height-mobileH)
+			bullets.push(bullet)
+		}
+	}
+}
+
+function mouseReleased(){
+	if(mobile)
+		ship.setDir(0)
 }
 
 function touchStarted(){
+	if(mobile){
+		if(ship.toDelete)
+		{
+			if(dist(touches[0].x, touches[0].y, width/2, (height-mobileH)/2+100) < 50)
+				resetGame()
+		}
+		
+		for(var i= 0; i < touches.length; i++)
+		{
+			if(touches[i].x >= 50 && touches[i].x <= 150 && touches[i].y >= height-mobileH/2-50 && touches[i].y <= height-mobileH/2+50)
+			ship.setDir(-1)
+			if(touches[i].x >= 200 && touches[i].x <= 300 && touches[i].y >= height-mobileH/2-50 && touches[i].y <= height-mobileH/2+50)
+				ship.setDir(1)
+			if(touches[i].x >= 400 && touches[i].x <= width-50 && touches[i].y >= height-mobileH/2-50 && touches[i].y <= height-mobileH/2+50 )
+			{
+				var bullet = new Bullet(Math.floor(ship.xpos+ship.img.width/2), height-mobileH)
+				bullets.push(bullet)
+			}
+		}
+		
+	}
+}
 
+function touchEnded(){
+	if(mobile)
+		ship.setDir(0)
 }
 
 function keyReleased(){
@@ -329,7 +401,7 @@ function keyReleased(){
 
 function keyPressed(){
 	if(key === ' '){
-		var bullet = new Bullet(Math.floor(ship.xpos+ship.img.width/2), height)
+		var bullet = new Bullet(Math.floor(ship.xpos+ship.img.width/2), height-mobileH)
 		bullets.push(bullet)
 	}
 	
@@ -346,3 +418,7 @@ function keyPressed(){
 		ship.setDir(-1)
 	}
 }
+
+$(document).ready(function(){
+	$('#mobile').prop("checked", mobile)
+});

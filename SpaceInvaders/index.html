@@ -3,6 +3,8 @@
 <meta charset="utf8">
 <title>Space Invaders</title>
 
+<meta name="viewport" content="user-scalable=no, minimal-ui">
+
 <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap-theme.min.css">
 
@@ -29,11 +31,13 @@
 <div class="page-header">
 	<h1><a href="/">PrinzJuliano App Collective<br><small>Space Invaders made with p5.js</small></a></h1>
 </div>
+<div class="col-md-1"><input type="checkbox" id="mobile" onchange="setCookie('mobileInput', this.checked, 365, '/SpaceInvaders/')">Mobile</input></div><br><br>
 <div id="highscore"></div>
 <div id="score"></div>
 
 <div id="frame"></div>
 <p class="controlls">Controlls: <kbd><span class="glyphicon glyphicon-arrow-left"></span></kbd> <kbd><span class="glyphicon glyphicon-arrow-right"></span></kbd> + <kbd style="font-family:'Pixel';font-size:24pt;">Spacebar</kbd></p>
 <p class="controlls">Press <kbd>1</kbd> to get fullscreen</p>
+<p class="controlls">Mobile Users: Toggle the box labeled 'Mobile' and refresh the page</p>
 </body>
 </html>
