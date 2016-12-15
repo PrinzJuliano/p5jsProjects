@@ -1,9 +1,9 @@
 # JavaScript p5js Projects
-All my snippets from p5js creation
-
 Where to find [P5.JS?](https://p5js.org)
 
-This are usually stupid but sometimes very clever snippets that I share with you.
+All my snippets from p5js creation
+
+These are usually stupid but sometimes very clever snippets that I share with you.
 
 If you find any additions, code redundancies, or generally optimisations please fork and request a merge.
 
