@@ -1,0 +1,205 @@
+<html>
+<head>
+<title>Starfield</title>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+
+<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap-theme.min.css">
+
+<script src="/libs/cookie.js"></script>
+<script src="/libs/jquery.min.js"></script>
+<script src="/libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="/libs/p5.min.js"></script>
+<script src="/libs/Math.min.js"></script>
+<script src="/libs/p5.Math.min.js"></script>
+<style>
+	body{
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
+	.panel {
+		padding-bottom: 0;
+		display:inline-block;
+		-webkit-box-shadow: 0px 20px 10px -10px rgba(0,0,0,0.75);
+		-moz-box-shadow: 0px 20px 10px -10px rgba(0,0,0,0.75);
+		box-shadow: 0px 20px 10px -10px rgba(0,0,0,0.75);
+		border: thin solid black;
+	}
+	.panel-body{
+		padding:0;
+		background:black;
+	}
+</style>
+<script>
+	var speed = 10;
+	var fps = {	
+		startTime : 0,	
+		frameNumber : 0,	
+		getFPS : function(){		
+			this.frameNumber++;		
+			var d = new Date().getTime(),			
+			currentTime = ( d - this.startTime ) / 1000,			
+			result = Math.floor( ( this.frameNumber / currentTime ) );		
+			if( currentTime > 1 ){			
+				this.startTime = new Date().getTime();			
+				this.frameNumber = 0;		
+			}		
+			return result;	
+		}	
+	};
+
+	function getRandomColor() {
+		var letters = '0123456789ABCDEF';
+		var color = '#';
+		for (var i = 0; i < 6; i++ ) {
+			color += letters[Math.floor(Math.random() * 16)];
+		}
+		return color;
+	}
+	
+	
+	class Star {
+	
+		constructor(){
+			this.randomize()
+		}
+		
+		randomize(){
+			this.x = random(-width, width)
+			this.y = random(-height, height)
+			this.z = random(width)
+			this.pz = this.z
+			this.color = $('#colorpick').prop('checked')?getRandomColor():'#fff'
+		}
+		
+		update(){
+			speed = $('#speed').val()
+			$('#speedlabel').text("Speed: " + speed)
+			this.z -= speed
+			if(this.z < 1){
+				this.randomize()
+				this.z = width;
+				this.pz = this.z
+			}
+			if(this.z > width)
+			{
+				this.randomize()
+				this.z = 0;
+				this.pz = this.z
+			}
+		}
+		
+		draw(){
+			fill(this.color)
+			noStroke()
+			
+			var sx = map(this.x / this.z, 0, 1, 0, width)
+			var sy = map(this.y / this.z, 0, 1, 0, height)
+			
+			var r = map(this.z, 0, width, 16, 0)
+			
+			ellipse(sx, sy, r, r)
+			
+			var px = map(this.x / this.pz, 0, 1, 0, width)
+			var py = map(this.y / this.pz, 0, 1, 0, height)
+			
+			stroke(this.color)
+			line(px, py, sx, sy)
+			
+			this.pz = this.z
+		}
+		
+		
+	}
+
+	var stars = new Array()
+	var amount = parseInt(getCookie("maxstars")) || 0;
+	if(amount == 0)
+	{
+		amount = 800
+		setCookie("maxstars", 800, 300, "/Starfield")
+	}
+	
+	
+	
+	function setup(){
+		$('#maxstars').val(amount)
+		$('#maxstarslabel').text("Maximum Stars: " + $('#maxstars').val())
+		$('#stars').prop("max", amount)
+		$('#stars').prop("step", amount/100)
+		$('#stars').prop("value", amount/2)
+		$('#starlabel').text("Stars: " + $('#stars').val())
+	
+		var mycanvas = createCanvas(800, 800)
+		mycanvas.parent("frame")
+		background('#000')
+		for(var i = 0; i < amount; i++)
+		{
+			stars[i] = new Star();
+		}
+	}
+	
+	function draw(){
+		background('#000')
+		translate(width / 2, height / 2)
+		$('#starlabel').text("Stars: " + $('#stars').val())
+		for(var j = 0; j < $('#stars').val(); j++)
+		{
+			
+			stars[j].update()
+			stars[j].draw()
+		}
+	}
+	
+	function saveCookie(){
+		setCookie("maxstars", $('#maxstars').val(), 300, "/Starfield")
+		$('#maxstarslabel').text("Maximum Stars: " + $('#maxstars').val())
+	}
+	
+	function gameLoop(){	
+		var refreshr = 120;
+		setTimeout( gameLoop,1000 / refreshr );	
+		var actualfps = (refreshr / 60) * fps.getFPS();
+		$('#fpscounter').text("FPS: " + actualfps);
+		if(actualfps>=60)
+			$('#fps-list-item').removeClass().addClass("list-group-item list-group-item-success")
+		else if(actualfps>=30)
+			$('#fps-list-item').removeClass().addClass("list-group-item list-group-item-warning")
+		else
+			$('#fps-list-item').removeClass().addClass("list-group-item list-group-item-danger")
+			
+	}
+</script>
+</head>
+<body onload="gameLoop()">
+<div class="page-header">
+	<h1><a href="/">PrinzJuliano App Collective<br><small>Starfield Generator with p5.js</small></a></h1>
+</div>
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<ul class="list-group">
+			<li class="list-group-item"><div id="maxstarslabel"></div> <input id="maxstars" type="range" min="0" max="100000" value="800" step="100" oninput="saveCookie()"></li>
+			<li class="list-group-item">Speed: <input id="speed" type="range" min="-100" max="100" value="10" step="1"></li>
+			<li class="list-group-item"><div id="starlabel"></div> <input id="stars" type="range" min="0" max="800" value="800" step="10"></li>
+			<li id="fps-list-item" class="list-group-item"><div id="fpscounter">FPS: 0</div></li>
+			<li class="list-group-item">Color: <input type="checkbox" id="colorpick" value=true></li>
+		</ul>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-offset-1">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">Starfield</h3>
+		  </div>
+		  <div class="panel-body" id='frame'>
+		  </div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

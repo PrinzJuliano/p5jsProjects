@@ -1,0 +1,56 @@
+<html>
+<head>
+<meta charset="utf8">
+<title>Snake</title>
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap-theme.min.css">
+
+<script src="/libs/cookie.js"></script>
+<script src="/libs/jquery.min.js"></script>
+<script src="/libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="/libs/p5.min.js"></script>
+<script src="/libs/Math.min.js"></script>
+<script src="/libs/p5.Math.min.js"></script>
+<script src="snake.js"></script>
+<script src="p5controller.js"></script>
+<style>
+@font-face {
+	font-family: 'Pixel';
+	src: url('/fonts/VCR_OSD_MONO_1.001.ttf');
+}
+@font-face {
+    font-family: 'Atari'; /*a name to be used later*/
+    src: url('/fonts/old.TTF'); /*URL to font*/
+}
+body, div, p {
+	color: white;
+	font-family: 'Pixel';
+	font-size:14pt;
+}
+body {
+	background: #0000ff;
+	padding: 5px;
+	padding-top: 0px;
+}
+h1 {
+	font-family: 'Atari';
+	font-size: 36pt;
+}
+</style>
+</head>
+<body style="color:white;">
+<div class="page-header">
+	<h1><a href="/"><font color="white">PrinzJuliano App Collective</font><br><small>Snake with p5.js</small></a></h1>
+</div>
+<div id="highscore" style="color:white;">Highscore: 0</div>
+<div id="currentScore" style="color:white;">Your Score: 0</div>
+<div id="frame"></div>
+<p style="color:white;">Objective: Do not eat your self but the pink rects</p>
+<p style="color:white;">Controlls: <kbd><span class="glyphicon glyphicon-arrow-left"></span></kbd> <kbd><span class="glyphicon glyphicon-arrow-up"></span></kbd> <kbd><span class="glyphicon glyphicon-arrow-down"></span></kbd> <kbd><span class="glyphicon glyphicon-arrow-right"></span></kbd></p>
+<p style="color:white;">Controlls Mobile: Swipe in the direction. CAREFULL: Fully implemented but not optimized!</p>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>Hi</title>
+<meta charset="utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+
+<script src="/libs/jquery.min.js"></script>
+<script src="/libs/angular.min.js"></script>
+<script src="/libs/Framework7/js/framework7.min.js"></script>
+<script>
+      (function () {
+        if (Framework7.prototype.device.android) {
+              Dom7('head').append(
+                  '<link rel="stylesheet" href="/libs/Framework7/css/framework7.material.min.css">' +
+                  '<link rel="stylesheet" href="/libs/Framework7/css/framework7.material.colors.min.css">' 
+              );
+          }
+          else {
+              Dom7('head').append(
+                  '<link rel="stylesheet" href="/libs/Framework7/css/framework7.ios.min.css">' +
+                  '<link rel="stylesheet" href="/libs/Framework7/css/framework7.ios.colors.min.css">'
+              );
+          }
+      })();
+	  
+</script>
+</head>
+<body>
+    <!-- Status bar overlay for full screen mode (PhoneGap) -->
+    <div class="statusbar-overlay"></div>
+    <!-- Views -->
+    <div class="views">
+		<div class="view view-main">
+			
+            <div class="pages navbar-through">
+               <div data-page="index" class="page with-subnavbar">
+					<div class="navbar">
+					  <div class="navbar-inner">
+						<div class="left"></div>
+						<div class="center">PrinzJuliano App Collective</div>
+						<div class="right"></div>
+					  </div>
+					  <div class="subnavbar">
+						  <form class="searchbar searchbar-init" data-search-list=".list-block-search" data-search-in=".item-title" data-found=".searchbar-found" data-not-found=".searchbar-not-found">
+								<div class="searchbar-input">
+									<input type="search" placeholder="Search">
+									<a href="#" class="searchbar-clear"></a>
+								</div>
+								<a href="#" class="searchbar-cancel">Cancel</a>
+							</form>
+					  </div>
+					</div>
+					
+					
+					<div class="searchbar-overlay"></div>
+				  <div class="page-content">
+					<div class="content-block searchbar-not-found">
+						<div class="content-block-inner">Nothing found</div>
+					</div>
+					
+					<div class="list-block list-block-search searchbar-found">
+					  <ul>
+						<li>
+						  <a href="Starfield" target="_self" class="item-link item-content external">
+							<div class="item-inner">
+							  <div class="item-title">Starfield</div>
+							</div>
+						  </a>
+						</li>
+						<li>
+						  <a href="/Snake" target="_self" class="item-link item-content external">
+							<div class="item-inner">
+							  <div class="item-title">Snake</div>
+							</div>
+						  </a>
+						</li>
+						<li>
+						  <a href="/touchtest.html" target="_self" class="item-link item-content external">
+							<div class="item-inner">
+							  <div class="item-title">Touch Test</div>
+							</div>
+						  </a>
+						</li>
+						<li>
+						  <a href="/Sponge" target="_self" class="item-link item-content external">
+							<div class="item-inner">
+							  <div class="item-title">Menger Fractal Sponge</div>
+							</div>
+						  </a>
+						</li>
+						<li>
+						  <a href="/SpaceInvaders" target="_self" class="item-link item-content external">
+							<div class="item-inner">
+							  <div class="item-title">Space Invaders</div>
+							</div>
+						  </a>
+						</li>
+					  </ul>
+					</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+		
+	</div>
+	
+	<script>
+		var $$ = Dom7;
+		var myApp = new Framework7();
+		
+		var mainView = myApp.addView('.view-main', {
+         // enable the dynamic navbar for this view:
+         dynamicNavbar: true
+         });
+		 
+		 myApp.initSearchbar('.searchbar');
+	</script>´
+</body>
+</html>
