@@ -17,4 +17,4 @@ You can use this code to enhance yours.
 + Some sort of Webserver (e.g.: python simplehttp, apache, nginx, tomcat, etc.)
 + A Webbrowser with either mouse + keyboard or touch device +/- keyboard.
 
-YOu want some action, click [THIS LINK](https://apps.pjog.de) and see live demos!
+You want some action, click [THIS LINK](https://apps.pjog.de) and see live demos!
