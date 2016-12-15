@@ -57,7 +57,6 @@ function resetGame(){
 	drawMother = null
 	spawnedMother = false
 	spawnMother = false
-	level = 0
 	ship = new Ship(player_img)
 	
 	//create two rows each of identical aliens
