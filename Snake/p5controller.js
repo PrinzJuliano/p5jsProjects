@@ -2,23 +2,19 @@ var s;
 var scl = 20; //scale
 var food;
 var highscore = parseInt(getCookie("highscore")) || 0;
-var point;
-var point2;
-
+var mobile = getCookie("mobileInput")=='true'
+var mobileH = (mobile?400:0)
 function setup(){
-	var canvas = createCanvas(600, 600)
+	var canvas = createCanvas(600, 600+mobileH)
 	canvas.parent("frame")
 	s = new Snake()
 	frameRate(10)
 	food = pickLocation()
-	touch1 = touch2 = createVector(0, 0)
-	point = createVector(0,0)
-	point2 = createVector(0,0)
 }
 
 function pickLocation(){
 	var cols = floor(width/scl)
-	var rows = floor(height/scl)
+	var rows = floor((height-mobileH)/scl)
 	
 	var v = createVector(floor(random(cols)), floor(random(rows)))
 	v.mult(scl)
@@ -45,6 +41,24 @@ function draw(){
 		highscore = s.total
 	}
 	$('#currentScore').text("Your score: " + s.total);
+	
+	if(mobile)
+	{
+		push()
+		stroke("white")
+		strokeWeight(5)
+		line(0, height-mobileH, width, height-mobileH)
+		pop()
+		
+		push()
+		fill(255,255,255)
+		rectMode(CENTER)
+		rect(width/2, height-mobileH/2-100, 100, 100) //up
+		rect(width/2-100, height-mobileH/2, 100, 100) //left
+		rect(width/2+100, height-mobileH/2, 100, 100) //right
+		rect(width/2, height-mobileH/2+100, 100, 100) //down
+		pop()
+	}
 }
 
 function keyPressed(){
@@ -62,50 +76,35 @@ function keyPressed(){
 		s.dir(-1, 0)
 	}
 }
-function touchStarted(){
-	point = point2 = touches[0]
-	dir = [0,0]
-}
-function touchMoved(){
-	point2 = touches[0]
-}
-function touchEnded(){
-	dir = calc()
-	s.dir(dir[0], dir[1])
-}
+
 function mousePressed(){
-	point = createVector(mouseX, mouseY)
-	point2 = createVector(mouseX, mouseY)
-	dir = [0,0]
-}
-function mouseDragged(){
-	point2 = createVector(mouseX, mouseY)
-}
-function mouseReleased(){
-	dir = calc()
-	if(!(dir[0] === 0 && dir[1] === 0))
-		s.dir(dir[0], dir[1])
-}
-
-function calc(){
-	var distanceX = point.x - point2.x
-	var distanceY = point.y - point2.y
-	
-	if(Math.abs(distanceX) > Math.abs(distanceY)){
-		if(distanceX > 0)
-			return [-1, 0] //left
-		else
-			return [1, 0] //right
+	if(mobile)
+	{
+		if(mouseX >= width/2-50 && mouseX <= width/2+50 && mouseY >= height-mobileH/2-150 && mouseY <= height-mobileH/2-50)
+			s.dir(0, -1)
+		if(mouseX >= width/2-50 && mouseX <= width/2+50 && mouseY >= height-mobileH/2+50 && mouseY <= height-mobileH/2+150)
+			s.dir(0, 1)
+		if(mouseX >= width/2-150 && mouseX <= width/2-50 && mouseY >= height-mobileH/2-50 && mouseY <= height-mobileH/2+50)
+			s.dir(-1, 0)
+		if(mouseX >= width/2+50 && mouseX <= width/2+150 && mouseY >= height-mobileH/2-50 && mouseY <= height-mobileH/2+50)
+			s.dir(1, 0)
 	}
-	if(Math.abs(distanceX) < Math.abs(distanceY)){
-		if(distanceY > 0)
-			return [0, -1] // down
-		else
-			return [0, 1] //up
-	}
-	
-	return [0,0]
 }
 
+function touchStarted(){
+	if(mobile){
+		if(touches[0].x >= width/2-50 && touches[0].x <= width/2+50 && touches[0].y >= height-mobileH/2-150 && touches[0].y <= height-mobileH/2-50)
+			s.dir(0, -1)
+		if(touches[0].x >= width/2-50 && touches[0].x <= width/2+50 && touches[0].y >= height-mobileH/2+50 && touches[0].y <= height-mobileH/2+150)
+			s.dir(0, 1)
+		if(touches[0].x >= width/2-150 && touches[0].x <= width/2-50 && touches[0].y >= height-mobileH/2-50 && touches[0].y <= height-mobileH/2+50)
+			s.dir(-1, 0)
+		if(touches[0].x >= width/2+50 && touches[0].x <= width/2+150 && touches[0].y >= height-mobileH/2-50 && touches[0].y <= height-mobileH/2+50)
+			s.dir(1, 0)
+	}
+}
 
+$(document).ready(function(){
+	$('#mobile').prop('checked', mobile)
+});
 

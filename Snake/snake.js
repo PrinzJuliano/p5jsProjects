@@ -19,15 +19,15 @@ function Snake() {
 		
 		if(this.x >= width && this.xspeed === 1)
 			this.x = 0
-		if(this.y >= height && this.yspeed === 1)
+		if(this.y >= height-mobileH && this.yspeed === 1)
 			this.y = 0
 		if(this.x <= -scl && this.xspeed === -1)
 			this.x = width
 		if(this.y <= -scl && this.yspeed === -1)
-			this.y = height
+			this.y = height-mobileH
 		
 		this.x = constrain(this.x, 0, width-scl)
-		this.y = constrain(this.y, 0, height-scl)
+		this.y = constrain(this.y, 0, height-mobileH-scl)
 		
 		
 	}
