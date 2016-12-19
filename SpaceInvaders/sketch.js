@@ -343,6 +343,7 @@ function draw(){
 function mousePressed(){
 	if(ship.toDelete && overInsertCoin)
 	{
+		level = 0
 		resetGame()
 	}
 	if(mobile)
@@ -403,19 +404,22 @@ function keyPressed(){
 	if(key === ' '){
 		var bullet = new Bullet(Math.floor(ship.xpos+ship.img.width/2), height-mobileH)
 		bullets.push(bullet)
+		return false;
 	}
 	
-	if(key === '1'){ //F11
+	if(key === '1'){
 		var fs = fullscreen();
 		fullscreen(!fs);
 	}
 
 	if(keyCode === RIGHT_ARROW){
 		ship.setDir(1)
+		return false;
 	}
 	else if(keyCode === LEFT_ARROW)
 	{
 		ship.setDir(-1)
+		return false;
 	}
 }
 

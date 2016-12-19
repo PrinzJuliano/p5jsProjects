@@ -4,6 +4,7 @@ var food;
 var highscore = parseInt(getCookie("highscore")) || 0;
 var mobile = getCookie("mobileInput")=='true'
 var mobileH = (mobile?400:0)
+var infoVisible = true;
 function setup(){
 	var canvas = createCanvas(600, 600+mobileH)
 	canvas.parent("frame")
@@ -65,16 +66,21 @@ function keyPressed(){
 	if(keyCode === UP_ARROW)
 	{
 		s.dir(0, -1)
+		return false;
 	} else if(keyCode === DOWN_ARROW)
 	{
 		s.dir(0, 1)
+		return false;
 	} else if(keyCode === RIGHT_ARROW)
 	{
 		s.dir(1, 0)
+		return false;
 	} else if(keyCode === LEFT_ARROW)
 	{
 		s.dir(-1, 0)
+		return false;
 	}
+	
 }
 
 function mousePressed(){
@@ -107,4 +113,18 @@ function touchStarted(){
 $(document).ready(function(){
 	$('#mobile').prop('checked', mobile)
 });
+
+function toggleInformation(btn){
+	if(infoVisible)
+	{
+		$('#informationList').css("display", "none");
+		$(btn).html('<span class="glyphicon glyphicon-resize-full"></span>');
+	}
+	else {
+		$('#informationList').css("display", "block");
+		$(btn).html('<span class="glyphicon glyphicon-resize-small"></span>');
+	}
+	
+	infoVisible = !infoVisible
+}
 

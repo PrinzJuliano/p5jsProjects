@@ -13,8 +13,6 @@
 <script src="/libs/jquery.min.js"></script>
 <script src="/libs/bootstrap/js/bootstrap.min.js"></script>
 <script src="/libs/p5.min.js"></script>
-<script src="/libs/Math.min.js"></script>
-<script src="/libs/p5.Math.min.js"></script>
 <script src="snake.js"></script>
 <script src="p5controller.js"></script>
 <style>
@@ -40,17 +38,29 @@ h1 {
 	font-family: 'Atari';
 	font-size: 36pt;
 }
+#infoPanel{
+	background:rgb(42,42,42);
+}
 </style>
 </head>
 <body style="color:white;">
 <div class="page-header">
 	<h1><a href="/"><font color="white">PrinzJuliano App Collective</font><br><small>Snake with p5.js</small></a></h1>
 </div>
-<div class="col-md-1"><input type="checkbox" id="mobile" onchange="setCookie('mobileInput', this.checked, 365, '/Snake/')">Mobile</input></div><br>
-<div id="highscore" style="color:white;">Highscore: 0</div>
-<div id="currentScore" style="color:white;">Your Score: 0</div>
+<div class="col-md-3 col-sm-12">
+	<div class="panel panel-primary" id="infoPanel">
+		<div class="panel-heading"><h3 class="panel-title"><button class="btn btn-default" onclick="toggleInformation(this)"><span class="glyphicon glyphicon-resize-small"></span></button> Information</h3></div>
+		<div class="panel-body" id="informationList">
+			<input type="checkbox" id="mobile" onchange="setCookie('mobileInput', this.checked, 365, '/Snake/')">Mobile</input><br>
+			<p style="color:white;">Objective: Do not eat your self but the pink rects</p>
+			<p style="color:white;">Controlls: <kbd><span class="glyphicon glyphicon-arrow-left"></span></kbd> <kbd><span class="glyphicon glyphicon-arrow-up"></span></kbd> <kbd><span class="glyphicon glyphicon-arrow-down"></span></kbd> <kbd><span class="glyphicon glyphicon-arrow-right"></span></kbd></p>
+			<p style="color:white;">Mobile Users: Toggle the box labeled 'Mobile' and refresh the page</p>
+			<div id="highscore" style="color:white;">Highscore: 0</div>
+			<div id="currentScore" style="color:white;">Your Score: 0</div>
+		</div>
+	</div>
+</div>
 <div id="frame"></div>
-<p style="color:white;">Objective: Do not eat your self but the pink rects</p>
-<p style="color:white;">Controlls: <kbd><span class="glyphicon glyphicon-arrow-left"></span></kbd> <kbd><span class="glyphicon glyphicon-arrow-up"></span></kbd> <kbd><span class="glyphicon glyphicon-arrow-down"></span></kbd> <kbd><span class="glyphicon glyphicon-arrow-right"></span></kbd></p>
+
 </body>
 </html>

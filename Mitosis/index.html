@@ -1,0 +1,82 @@
+<html>
+<head>
+<meta charset="utf8">
+<title>Mitosis</title>
+
+<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap-theme.min.css">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, min-scale=1, max-scale=1, user-scalable=no, minimal-ui">
+
+<!-- stuff for webapp -->
+<meta name="apple-mobile-web-app-title" content="Mitosis">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="light">
+<link rel="apple-touch-icon" sizes="58x58"   href="icons/touch-icon-iphone.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icons/touch-icon-ipad.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/touch-icon-iphone-retina.png">
+<link rel="apple-touch-icon" sizes="167x167" href="icons/touch-icon-ipad-retina.png">
+<link rel="apple-touch-startup-image" href="icons/launch.png">
+<link rel="shortcut icon" href="icons/touch-icon-iphone-retina.png">
+
+
+<script src="/libs/jquery.min.js" type="text/javascript"></script>
+<script src="/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/libs/p5.min.js" type="text/javascript"></script>
+<script src="/libs/p5.dom.min.js" type="text/javascript"></script>
+<script src="/libs/p5.sound.min.js" type="text/javascript"></script>
+<script src="/libs/cookie.js"></script>
+<script src="cell.js" type="text/javascript"></script>
+<script src="sketch.js" type="text/javascript"></script>
+
+<style>
+#infoPanel {
+	margin-left:14px;
+	display:inline-block;
+	border:none;
+	-webkit-box-shadow: 0px 5px 5px -2px rgba(50, 50, 50, 1);
+	-moz-box-shadow:    0px 5px 5px -2px rgba(50, 50, 50, 1);
+	box-shadow:         0px 5px 5px -2px rgba(50, 50, 50, 1);
+}
+body {
+	 overflow-x: hidden;
+}
+</style>
+
+</head>
+<body onload="fpsTick()">
+<div class="page-header">
+	<h1><a href="/">PrinzJuliano App Collective<br><small>Mitosis Simulation made with p5.js</small></a></h1>
+</div>
+<div class="col-md-3 col-sm-12">
+	<div class="panel panel-primary" id="infoPanel">
+		<div class="panel-heading"><h3 class="panel-title"><button class="btn btn-default" onclick="toggleInformation(this)"><span class="glyphicon glyphicon-resize-small"></span></button> Information</h3></div>
+		<ul class="list-group" id="informationList">
+			<li class="list-group-item"><kbd>Left-Click</kbd> or <kbd>Tap</kbd> somewhere to spawn a new cell.</li>
+			<li class="list-group-item"><button class="btn btn-default" onclick="splitAll()"><kbd>S</kbd></button> to split all.</li>
+			<li class="list-group-item"><button class="btn btn-default" onclick="killAll()"><kbd>K</kbd></button> to kill all.</li>
+			<li class="list-group-item"><button class="btn btn-default" onclick="fullsc()"><kbd>F</kbd></button> to go Fullscreen. <br><br><pre>Note that on Mobile devices<br>you need to save the website<br>as link to your screen<br>and on most browsers<br>you can just press F11!</pre></li>
+			<li class="list-group-item"><h4>Settings:</h3></li>
+			<li class="list-group-item"><div id="chanceToGrowLabel">Chance to grow: 25%</div> <input id="chanceToGrow" type="range" min="0" max="100" value="25" step="0.1" oninput="checkAll()"></li>
+			<li class="list-group-item"><div id="amountToGrowMaxLabel">Amount to max. grow: 1</div> <input id="amountToGrowMax" type="range" min="0" max="10" value="1" step="0.1" oninput="checkAll()"></li>
+			<li class="list-group-item"><div id="minRadiusLabel">Min. Radius to split: 80</div> <input id="minRadius" type="range" min="1" max="250" value="80" step="1" oninput="checkAll()"></li>
+			<li class="list-group-item"><div id="chanceToSplitLabel">Chance to split: 50%</div> <input id="chanceToSplit" type="range" min="0" max="100" value="50" step="0.1" oninput="checkAll()"></li>
+			<li class="list-group-item"><div id="chanceToDieLabel">Chance to die: 5%</div> <input id="chanceToDie" type="range" min="0" max="100" value="5" step="0.1" oninput="checkAll()"></li>
+			<li class="list-group-item">
+				<div class="btn-group" role="group" aria-label="...">
+					<button class="btn btn-success" onclick="saveSettings()">Save</button>
+					<button class="btn btn-primary" onclick="loadSettings()">Load</button>
+					<button class="btn btn-danger" onclick="resetSettings()">Reset</button>
+				</div>
+			</li>
+			<li class="list-group-item"><h4>Data:</h3></li>
+			<li class="list-group-item" id="fps-list-item"><div id="fpscounter">FPS: 0</div></li>
+			<li class="list-group-item"><div id="population"></div></li>
+		</table>
+	</div>
+</div>
+<div id="frame"></div>
+
+</body>
+</html>

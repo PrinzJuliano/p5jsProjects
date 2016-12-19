@@ -1,29 +1,69 @@
 <html>
 <head>
-<title>Hi</title>
+<title>PrinzJuliano App Collective</title>
 <meta charset="utf-8">
+<meta name="apple-mobile-web-app-title" content="PrinzJuliano App Collective">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-status-bar-style" content="light">
+<link rel="apple-touch-icon" sizes="58x58"   href="icns/touch-icon-iphone.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icns/touch-icon-ipad.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icns/touch-icon-iphone-retina.png">
+<link rel="apple-touch-icon" sizes="167x167" href="icns/touch-icon-ipad-retina.png">
+<link rel="shortcut icon" href="icns/touch-icon-iphone-retina.png">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
 
 <script src="/libs/jquery.min.js"></script>
 <script src="/libs/angular.min.js"></script>
 <script src="/libs/Framework7/js/framework7.min.js"></script>
 <script>
-      (function () {
-        if (Framework7.prototype.device.android) {
-              Dom7('head').append(
-                  '<link rel="stylesheet" href="/libs/Framework7/css/framework7.material.min.css">' +
-                  '<link rel="stylesheet" href="/libs/Framework7/css/framework7.material.colors.min.css">' 
-              );
-          }
-          else {
-              Dom7('head').append(
-                  '<link rel="stylesheet" href="/libs/Framework7/css/framework7.ios.min.css">' +
-                  '<link rel="stylesheet" href="/libs/Framework7/css/framework7.ios.colors.min.css">'
-              );
-          }
-      })();
+	(function () {
+		if (Framework7.prototype.device.android) {
+			Dom7('head').append(
+			  '<link rel="stylesheet" href="/libs/Framework7/css/framework7.material.min.css">' +
+			  '<link rel="stylesheet" href="/libs/Framework7/css/framework7.material.colors.min.css">' 
+			);
+		}
+		else {
+			Dom7('head').append(
+			  '<link rel="stylesheet" href="/libs/Framework7/css/framework7.ios.min.css">' +
+			  '<link rel="stylesheet" href="/libs/Framework7/css/framework7.ios.colors.min.css">'
+			);
+		}
+	})();
+	  
+	function srt(desc,key) {
+	 return function(a,b){
+	   return desc ? ~~(key ? a[key]<b[key] : a < b) 
+				   : ~~(key ? a[key] > b[key] : a > b);
+	  };
+	}
+	  
+	$(document).ready(function(){
+		var links = [];
+		links.push({'name': 'Menger Fractal Sponge', 'link':'/Sponge', 'self': true});
+		links.push({'name': 'Mitosis', 'link':'/Mitosis', 'self': true});
+		links.push({'name': 'Snake', 'link':'/Snake', 'self': true});
+		links.push({'name': 'Space Invaders', 'link':'/SpaceInvaders', 'self': true});
+		links.push({'name': 'Starfield', 'link':'/Starfield', 'self': true});
+		links.push({'name': 'Maze Generator', 'link':'/MazeGenerator', 'self': true});
+		links.push({'name': 'Touch Test', 'link':'/touchtest.html', 'self': true});
+		links.push({'name': 'PrinzJuliano GitHub', 'link':'http://github.com/PrinzJuliano', 'self': false});
+		links.push({'name': 'About PJOG', 'link':'http://pjog.de/about.php', 'self': false});
+		links.push({'name': 'PJOG Support', 'link':'http://pjog.de/support/', 'self': false});
+
+		links.sort(srt(null, 'name'));
+		
+		for(var i = 0; i < links.length; i++)
+		{
+			$('#links').append('<li>' +
+								'<a href="'+links[i].link+'" target="'+(links[i].self?'_self':'_blank')+'" class="item-link item-content external">'+
+								'<div class="item-inner">'+
+								'<div class="item-title">'+links[i].name+'</div>'+
+								'</div>'+
+								'</a>'+
+								'</li>');
+		}
+	});
 	  
 </script>
 </head>
@@ -61,42 +101,7 @@
 					</div>
 					
 					<div class="list-block list-block-search searchbar-found">
-					  <ul>
-						<li>
-						  <a href="Starfield" target="_self" class="item-link item-content external">
-							<div class="item-inner">
-							  <div class="item-title">Starfield</div>
-							</div>
-						  </a>
-						</li>
-						<li>
-						  <a href="/Snake" target="_self" class="item-link item-content external">
-							<div class="item-inner">
-							  <div class="item-title">Snake</div>
-							</div>
-						  </a>
-						</li>
-						<li>
-						  <a href="/touchtest.html" target="_self" class="item-link item-content external">
-							<div class="item-inner">
-							  <div class="item-title">Touch Test</div>
-							</div>
-						  </a>
-						</li>
-						<li>
-						  <a href="/Sponge" target="_self" class="item-link item-content external">
-							<div class="item-inner">
-							  <div class="item-title">Menger Fractal Sponge</div>
-							</div>
-						  </a>
-						</li>
-						<li>
-						  <a href="/SpaceInvaders" target="_self" class="item-link item-content external">
-							<div class="item-inner">
-							  <div class="item-title">Space Invaders</div>
-							</div>
-						  </a>
-						</li>
+					  <ul id="links">
 					  </ul>
 					</div>
                   </div>

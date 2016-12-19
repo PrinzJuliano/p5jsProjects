@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta charset="utf8">
+<title>Maze Generator</title>
+
+<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap-theme.min.css">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<script src="/libs/jquery.min.js" type="text/javascript"></script>
+<script src="/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/libs/p5.min.js" type="text/javascript"></script>
+<script src="/libs/p5.dom.min.js" type="text/javascript"></script>
+<script src="/libs/p5.sound.min.js" type="text/javascript"></script>
+<script src="/libs/cookie.js"></script>
+<script src="cell.js" type="text/javascript"></script>
+<script src="sketch.js" type="text/javascript"></script>
+
+
+
+</head>
+<body>
+<div class="page-header">
+	<h1><a href="/">PrinzJuliano App Collective<br><small>Maze Generator made with p5.js</small></a></h1>
+</div>
+<div class="col-md-3 col-sm-12">
+	<div class="panel panel-primary" id="infoPanel">
+		<div class="panel-heading"><h3 class="panel-title"><button class="btn btn-default" onclick="toggleInformation(this)"><span class="glyphicon glyphicon-resize-small"></span></button> Information</h3></div>
+		<ul class="list-group" id="informationList">
+			<li class="list-group-item"><div id="widthSelectLabel">Width</div> <input id="widthSelect" type="number" oninput="checkAll()" value="400"></li>
+			<li class="list-group-item"><div id="heightSelectLabel">Height</div> <input id="heightSelect" type="number" oninput="checkAll()" value="400"></li>
+			<li class="list-group-item"><div id="cellWidthSelectLabel">Cell Width / Height</div> <input type="number" id="cellWidthSelect" oninput="checkAll()" value="40"></li>
+			<li class="list-group-item"><div id="drawLabel">Draw Process</div> <input type="checkbox" id="drawSelect" oninput="checkAll()" checked="true"></li>
+			<li class="list-group-item">
+				<button class="btn btn-success" onclick="applySettings()">Start</button>
+				<a class="btn btn-primary" id="download">Save Image</a>
+				
+			</li>
+		</ul>
+	</div>
+</div>
+<div id="frame"></div>
+
+</body>
+</html>
