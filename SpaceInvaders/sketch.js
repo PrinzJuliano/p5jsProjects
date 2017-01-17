@@ -256,7 +256,6 @@ function draw(){
 			
 			//check if no enemies are beeing on screen, since we always splice it's no problem to assume the last one will be on number 0
 			if(enemies[0] == null && mother == null){
-				level = 0;
 				resetGame()
 			}
 		}//ship.hit
