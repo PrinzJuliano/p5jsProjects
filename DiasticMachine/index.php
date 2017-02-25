@@ -1,6 +1,6 @@
 <?php
-	$title = "";
-	$description = "";
+	$title = "Diastic Machine";
+	$description = "A poetry generator";
 ?>
 
 <html>
@@ -12,13 +12,9 @@
 <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap-theme.min.css">
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, min-scale=1, max-scale=1, user-scalable=no, minimal-ui">
+<meta name="viewport" content="width=device-width, initial-scale=1, min-scale=1, max-scale=1, user-scalable=yes, minimal-ui">
 
-<meta http-equiv="cache-control" content="max-age=0" />
-<meta http-equiv="cache-control" content="no-cache" />
-<meta http-equiv="expires" content="0" />
-<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-<meta http-equiv="pragma" content="no-cache" />
+
 
 <script src="/libs/jquery.min.js" type="text/javascript"></script>
 <script src="/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -46,14 +42,23 @@ body {
 	<h1><a href="/">PrinzJuliano App Collective<br><small><?php echo $description; ?> made with p5.js</small></a></h1>
 </div>
 
-
-
-	<div class="panel panel-default">
+<div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Controls</h3>
+    <h3 class="panel-title">Input</h3>
   </div>
   <table class="table">
 	<tr><th>Key</th><th>Value</th></tr>
-	<tr><td>Delta</td><td id="delta"></td></tr>
+	<tr><td align="center">seed</td>
+		<td>
+			<div class="input-group">
+			<span class="input-group-btn">
+        <button class="btn btn-success" id="submit" type="button">Generate</button>
+      </span>
+			<input id="seed" type="text" pattern="[A-Za-z]+"  title="Seed" value="Rainbow" class="form-control"></input>
+			</div>
+		</td></tr>
   </table>
-</div>
+</div><br>
+
+</body>
+</html>
