@@ -160,16 +160,16 @@ function checkFor(pos, data){
 
 function getMaximumScoreForStage(st)
 {
-	if(st == 0)
+	if(st <= 0)
 		return 0;
-	return (4+2*st)*13+getMaximumScoreForStage(st-1);
+	return (4+2*st)*77+getMaximumScoreForStage(st-1);
 }
 
 function getMinimumScoreForStage(st)
 {
-	if(st == 0)
+	if(st <= 0)
 		return 0;
-	return (3+st)*12+getMinimumScoreForStage(st-1);
+	return (3+st)*13+getMinimumScoreForStage(st-1);
 }
 
 // All the initialization for jquery

@@ -21,7 +21,7 @@ function preload(){
 	console.log("Loading assets");
 	
 	fontPixel = loadFont("/fonts/VCR_OSD_MONO_1.001.ttf");
-	fontAtari = loadFont("/fonts/old.ttf");
+	fontAtari = loadFont("/fonts/old.TTF");
 }
 
 function reset(){
