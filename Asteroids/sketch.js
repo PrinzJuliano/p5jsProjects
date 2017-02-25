@@ -28,8 +28,8 @@ function reset(){
 	ship = new Ship();
 	asteroids = [];
 	lasers = [];
-	score = 0;
-	stage = 1;
+	//score = 0;
+	//stage = 1;
 	inGame = true;
 	showModal = false;
 	generateNew();
