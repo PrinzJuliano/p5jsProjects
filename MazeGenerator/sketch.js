@@ -73,6 +73,10 @@ function draw(){
 			grid[i].draw();
 		}
 	
+		stroke(0);
+		strokeWeight(2);
+		line(width, 0, width, height);
+		line(0, height, width, height);
 	
 		current.visited = true;
 		if(!done)
@@ -98,7 +102,6 @@ function draw(){
 		}
 		else {
 			done = true;
-			noLoop();
 		}
 	}
 	else {
