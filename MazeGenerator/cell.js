@@ -58,8 +58,8 @@ function Cell(i, j){
 		
 		if(this.visited){
 			noStroke();
-			fill(255, 255, 255);
-			rect(x+1, y+1, w, w);
+			fill(0, 0, 255, 100);
+			rect(x, y, w, w);
 		}
 		pop();
 	}
